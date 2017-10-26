@@ -1,17 +1,21 @@
-/**
- * Created by M.C on 2017/9/15.
- */
-//import bcrypt from "bcrypt"
-
-module.exports = (sequelize,Sequelize) => {
-    "use strict";
-    const Users = sequelize.define("Users", {
-
-    });
-    Users.associate = (models) => {
-        //Users.hasMany(models.Tasks);
-    };
-
-
-    return Users;
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var Users = sequelize.define('Users', {
+    id: {
+        type:DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    name: DataTypes.STRING(10),
+    password: DataTypes.STRING(6),
+    email: DataTypes.STRING(20)
+  }, {
+    classMethods: {
+      associate: function(models) {
+        // associations can be defined here
+        Users.hasMany(models.Tasks);
+    }
+    }
+  });
+  return Users;
 };

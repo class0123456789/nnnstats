@@ -1,15 +1,17 @@
-/**
- * Created by M.C on 2017/9/15.
- */
-module.exports = (sequelize, Sequelize) => {
-    "use strict";
-    const Tasks = sequelize.define('tasks', {
-      title: Sequelize.STRING,
-      description: Sequelize.TEXT,
-      deadline: Sequelize.DATE
-    });
-    Tasks.associate = (models) => {
-        //Tasks.belongsTo(models.Users);
-    };
-    return Tasks;
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var Tasks = sequelize.define('Tasks', {
+    title: DataTypes.STRING(30),
+    done: DataTypes.BOOLEAN
+  }, {
+    classMethods: {
+      associate: function(models) {
+
+            Tasks.belongsTo(models.Users);
+
+        // associations can be defined here
+      }
+    }
+  });
+  return Tasks;
 };
